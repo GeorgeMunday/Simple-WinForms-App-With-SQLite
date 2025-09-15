@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Data.SQLite;
+
 
 namespace Login_Signin_Logout
 {
@@ -22,11 +24,13 @@ namespace Login_Signin_Logout
             headingContainer.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
             // Main Heading
-            Heading1.Text = "Welcome to the Application";
+            Heading1.Text = "Lets get you logged in!";
             Heading1.TextAlign = ContentAlignment.MiddleCenter;
             Heading1.Dock = DockStyle.Fill;
             Heading1.Font = new Font("Segoe UI", 18, FontStyle.Bold);
             Heading1.ForeColor = Color.White;
+            Heading1.Location = new Point(0, 20);
+            Heading1.Padding = new Padding(65, 30, 0, 0);
             // Username Label
             userName.Text = "Username";
             userName.Font = new Font("Segoe UI", 10, FontStyle.Regular);
@@ -76,19 +80,58 @@ namespace Login_Signin_Logout
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
 
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter both username and password.");
+                return;
+            }
+
+            string dbPath = @"C:\Users\geoge\OneDrive\Desktop\dbs\new.db";
+            string connectionString = $"Data Source={dbPath};Version=3;";
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT COUNT(1) FROM Users WHERE Username=@Username AND Password=@Password";
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        cmd.Parameters.AddWithValue("@Password", password);
+
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (count == 1)
+                        {
+                            MessageBox.Show("Login successful!");
+                            Dashboard dashboardForm = new Dashboard(username);
+                            dashboardForm.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid username or password.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error connecting to database: " + ex.Message);
+                }
+            }
         }
+
 
         private void regesterLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            // Create and show the Signup form
             Signup signupForm = new Signup();
             signupForm.Show();
-
-            // Hide the current Login form
             this.Hide();
         }
 
     }
-}
 }

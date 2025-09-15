@@ -36,22 +36,27 @@
             this.Password = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.userName = new System.Windows.Forms.Label();
+            this.txtLastName = new System.Windows.Forms.TextBox();
+            this.lastName = new System.Windows.Forms.Label();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.firstName = new System.Windows.Forms.Label();
             this.headingContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // regesterLabel
             // 
             this.regesterLabel.AutoSize = true;
-            this.regesterLabel.Location = new System.Drawing.Point(23, 392);
+            this.regesterLabel.Location = new System.Drawing.Point(14, 529);
             this.regesterLabel.Name = "regesterLabel";
             this.regesterLabel.Size = new System.Drawing.Size(91, 16);
             this.regesterLabel.TabIndex = 17;
             this.regesterLabel.TabStop = true;
             this.regesterLabel.Text = "regesterLabel";
+            this.regesterLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.regesterLabel_LinkClicked);
             // 
             // btnSignUp
             // 
-            this.btnSignUp.Location = new System.Drawing.Point(12, 295);
+            this.btnSignUp.Location = new System.Drawing.Point(17, 426);
             this.btnSignUp.Name = "btnSignUp";
             this.btnSignUp.Size = new System.Drawing.Size(461, 80);
             this.btnSignUp.TabIndex = 16;
@@ -109,11 +114,47 @@
             this.userName.TabIndex = 11;
             this.userName.Text = "username";
             // 
+            // txtLastName
+            // 
+            this.txtLastName.Location = new System.Drawing.Point(96, 362);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(178, 22);
+            this.txtLastName.TabIndex = 21;
+            // 
+            // lastName
+            // 
+            this.lastName.AutoSize = true;
+            this.lastName.Location = new System.Drawing.Point(23, 362);
+            this.lastName.Name = "lastName";
+            this.lastName.Size = new System.Drawing.Size(65, 16);
+            this.lastName.TabIndex = 20;
+            this.lastName.Text = "lastName";
+            // 
+            // txtFirstName
+            // 
+            this.txtFirstName.Location = new System.Drawing.Point(96, 299);
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(178, 22);
+            this.txtFirstName.TabIndex = 19;
+            // 
+            // firstName
+            // 
+            this.firstName.AutoSize = true;
+            this.firstName.Location = new System.Drawing.Point(23, 299);
+            this.firstName.Name = "firstName";
+            this.firstName.Size = new System.Drawing.Size(64, 16);
+            this.firstName.TabIndex = 18;
+            this.firstName.Text = "first name";
+            // 
             // Signup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 439);
+            this.ClientSize = new System.Drawing.Size(460, 743);
+            this.Controls.Add(this.txtLastName);
+            this.Controls.Add(this.lastName);
+            this.Controls.Add(this.txtFirstName);
+            this.Controls.Add(this.firstName);
             this.Controls.Add(this.regesterLabel);
             this.Controls.Add(this.btnSignUp);
             this.Controls.Add(this.headingContainer);
@@ -140,5 +181,9 @@
         private System.Windows.Forms.Label Password;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label userName;
+        private System.Windows.Forms.TextBox txtLastName;
+        private System.Windows.Forms.Label lastName;
+        private System.Windows.Forms.TextBox txtFirstName;
+        private System.Windows.Forms.Label firstName;
     }
 }
